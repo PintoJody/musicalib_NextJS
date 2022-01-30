@@ -2,9 +2,11 @@
 Music library. Use NextJS, Sytled-components. 
 
 
-INSTALL
 
-Clone this project
+// INSTALL \\\
 
-npm i
+```
+npm i 
 npm run dev
+```
+
