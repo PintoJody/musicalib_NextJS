@@ -8,6 +8,12 @@ const SongSchema = new mongoose.Schema({
         trim: true,
         maxlength: [40, 'Le titre ne doit pas comporter plus de 40 characteres']
     },
+    author: {
+        type: String,
+        required: [true, 'Ajouter un auteur'],
+        trim: true,
+        maxlength: [50, 'Auteur ne doit pas comporter plus de 50 characteres']
+    },
     description: {
         type: String,
         required: true,

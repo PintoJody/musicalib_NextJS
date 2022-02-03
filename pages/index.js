@@ -1,13 +1,7 @@
-import styled from 'styled-components'
-import Link from 'next/link'
+import styled from 'styled-components';
+import Link from 'next/link';
+import fetch from 'isomorphic-unfetch';
 
-
-const Title1 = styled.h1`
-  font-size: 2rem;
-  background: black;
-  text-align:center;
-  color: white;
-`
 
 const SearchForm = styled.div`
   display: flex;
@@ -28,7 +22,7 @@ const CardsContainer = styled.div`
   flex-flow : row wrap;
 `
 
-const CardLink = styled.a`
+const CardSong = styled.div`
   padding: 7rem 3rem;
   background: #831010;
   border-radius: 15px;
@@ -36,11 +30,9 @@ const CardLink = styled.a`
   color: white;
 `
 
-export default function Home() {
+const Index = ({ songs }) => {
   return(
     <>
-    <Title1>Musicalib</Title1>
-    
     <SearchForm>
       <form>
         <input id="search" name="search" type="text" placeholder='Titre, auteur, ...' />
@@ -49,40 +41,38 @@ export default function Home() {
     </SearchForm>
 
     <Wrapper>
-      <CardsContainer>
-        <Link href="/">
-          <CardLink>Carte Musique</CardLink>
-        </Link>
-        <Link href="/">
-          <CardLink>Carte Musique</CardLink>
-        </Link>
-        <Link href="/">
-          <CardLink>Carte Musique</CardLink>
-        </Link>
-        <Link href="/">
-          <CardLink>Carte Musique</CardLink>
-        </Link>
-        <Link href="/">
-          <CardLink>Carte Musique</CardLink>
-        </Link>
-        <Link href="/">
-          <CardLink>Carte Musique</CardLink>
-        </Link>
-        <Link href="/">
-          <CardLink>Carte Musique</CardLink>
-        </Link>
-        <Link href="/">
-          <CardLink>Carte Musique</CardLink>
-        </Link>
-        <Link href="/">
-          <CardLink>Carte Musique</CardLink>
-        </Link>
-        <Link href="/">
-          <CardLink>Carte Musique</CardLink>
-        </Link>
-      </CardsContainer>
-    </Wrapper>
+    {songs.map(song => {
+          return (
+          <CardsContainer>
+          <CardSong>
+            <h1>{song.title}</h1>
+            <p>{song.author}</p>
+            <p>{song.description}</p>
 
+            <Link href={`/${song._id}`}>
+              <a>View</a>
+            </Link>
+            <Link href={`/${song._id}/edit`}>
+              <a>Edit</a>
+            </Link>
+
+          </CardSong>
+      </CardsContainer>
+        )
+    }
+    )
+  }
+    </Wrapper>
     </>
   )
 }
+
+
+Index.getInitialProps = async () => {
+  const res = await fetch('http://localhost:3000/api/songs');
+  const { data } = await res.json();
+
+  return { songs: data }
+}
+
+export default Index;

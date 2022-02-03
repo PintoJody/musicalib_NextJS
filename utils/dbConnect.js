@@ -14,6 +14,7 @@ async function dbConnect(){
 
     connection.isConnected = db.connections[0].readyState;
     console.log(connection.isConnected);
+    console.log("MongoDB server is connected !");
 }
 
 export default dbConnect;
