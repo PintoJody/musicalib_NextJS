@@ -1,6 +1,6 @@
-import styled from 'styled-components';
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
+import styled from 'styled-components';
 
 
 const SearchForm = styled.div`
@@ -17,17 +17,25 @@ const Wrapper = styled.div`
 
 const CardsContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-flow : row wrap;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 2rem
 `
 
 const CardSong = styled.div`
-  padding: 7rem 3rem;
+  padding: 3rem 2rem;
   background: #831010;
   border-radius: 15px;
-  box-shadow: 3px 3px 10px 3px #564D4D;
   color: white;
+  width: 15%;
+`
+
+const CardAdd = styled.div`
+  padding: 4rem 2rem;
+  background: grey;
+  border-radius: 15px;
+  color: black;
+  width: 15%;
 `
 
 const Index = ({ songs }) => {
@@ -41,27 +49,31 @@ const Index = ({ songs }) => {
     </SearchForm>
 
     <Wrapper>
-    {songs.map(song => {
+      <CardsContainer>
+        <CardAdd>
+          <Link href="/new">
+            <a>Ajouter</a>
+          </Link>
+        </CardAdd>
+          {songs.map(song => {
           return (
-          <CardsContainer>
-          <CardSong>
-            <h1>{song.title}</h1>
-            <p>{song.author}</p>
-            <p>{song.description}</p>
+            <CardSong>
+              <h1>{song.title}</h1>
+              <p>{song.author}</p>
+              <p>{song.description}</p>
 
-            <Link href={`/${song._id}`}>
-              <a>View</a>
-            </Link>
-            <Link href={`/${song._id}/edit`}>
-              <a>Edit</a>
-            </Link>
-
-          </CardSong>
-      </CardsContainer>
+              <Link href={`/${song._id}`}>
+                <a>View</a>
+              </Link>
+              <Link href={`/${song._id}/edit`}>
+                <a>Edit</a>
+              </Link>
+            </CardSong>
         )
     }
     )
   }
+      </CardsContainer>
     </Wrapper>
     </>
   )
