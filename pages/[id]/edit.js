@@ -2,6 +2,14 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
+
+const SongsForm = styled.div`
+    display: flex; 
+    flex-flow : column nowrap;
+    max-width : 500px;
+    margin: 0 auto;
+`
 
 const EditSong = ({ song }) => {
     const [form, setForm] = useState({ title: song.title, author: song.author, description: song.description });
@@ -62,6 +70,9 @@ const EditSong = ({ song }) => {
         if (!form.description) {
             err.description = 'Description is required';
         }
+        // if (!form.url_img) {
+        //     err.url_img = 'url_img is required';
+        // }
 
         return err;
     }
@@ -70,7 +81,7 @@ const EditSong = ({ song }) => {
         <div className="form-container">
             <h1>Create Song</h1>
             <div>
-            <form onSubmit={handleSubmit}>
+            <SongsForm onSubmit={handleSubmit}>
                 <label htmlFor="title">Titre</label>
                 <input id="title" name="title" type="text" autoComplete="title" onChange={handleChange} required />
 
@@ -80,8 +91,8 @@ const EditSong = ({ song }) => {
                 <label htmlFor="description">Description</label>
                 <textarea id="description" name="description" type="textarea" autoComplete="description" onChange={handleChange} required />
 
-                 <button type="submit">Ajouter</button>
-            </form>
+                <button type="submit">Ajouter</button>
+            </SongsForm>
             </div>
         </div>
     )

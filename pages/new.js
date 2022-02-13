@@ -2,9 +2,17 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
+
+const SongsForm = styled.div`
+    display: flex; 
+    flex-flow: column nowrap; 
+    max-width : 600px;
+    margin: 0 auto;
+`
 
 const NewSong = () => {
-    const [form, setForm] = useState({ title: '', author: '', description: '' });
+    const [form, setForm] = useState({ title: '', author: '', description: '', url_img: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState({});
     const router = useRouter();
@@ -62,6 +70,9 @@ const NewSong = () => {
         if (!form.description) {
             err.description = 'Description is required';
         }
+        if (!form.url_img) {
+            err.url_img = 'url_img is required';
+        }
 
         return err;
     }
@@ -79,6 +90,9 @@ const NewSong = () => {
 
                 <label htmlFor="description">Description</label>
                 <textarea id="description" name="description" type="textarea" autoComplete="description" onChange={handleChange} required />
+
+                <label htmlFor="url_img">URL image</label>
+                <textarea id="url_img" name="url_img" type="url" autoComplete="image_url" onChange={handleChange} required />
 
                  <button type="submit">Ajouter</button>
             </form>

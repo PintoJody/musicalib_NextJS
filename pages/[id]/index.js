@@ -1,6 +1,22 @@
 import fetch from 'isomorphic-unfetch';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
+
+
+const SongsForm = styled.div`
+    display: flex; 
+    flex-flow : column nowrap;
+    max-width : 500px;
+    margin: 0 auto;
+`
+
+const ButtonDelete = styled.button`
+    background-color : #831010;
+    width : 5rem;
+    color: white;
+`
+
 
 const Song = ({ song }) => {
     const [confirm, setConfirm] = useState(false);
@@ -32,12 +48,12 @@ const Song = ({ song }) => {
 
     return (
         <div className="song-container">
-                <>
+                <SongsForm>
                     <h1>{song.title}</h1>
                     <p>{song.author}</p>
                     <p>{song.description}</p>
-                    <button color='red' onClick={handleDelete}>Delete</button>
-                </>
+                    <ButtonDelete onClick={handleDelete}>Delete</ButtonDelete>
+                </SongsForm>
         </div>
         
     )

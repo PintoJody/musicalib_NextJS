@@ -18,6 +18,10 @@ const SongSchema = new mongoose.Schema({
         type: String,
         required: true,
         maxlength: [200, 'La description ne doit pas comporter plus de 40 characteres']
+    },
+    url_img: {
+        type: String,
+        required: true,
     }
 })
 

@@ -1,13 +1,8 @@
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
 import styled from 'styled-components';
+import Image from 'next/image';
 
-
-const SearchForm = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin: 4rem 4rem 0 0;
-`
 
 const Wrapper = styled.div`
   max-width: 1250px;
@@ -38,16 +33,11 @@ const CardAdd = styled.div`
   width: 15%;
 `
 
+
 const Index = ({ songs }) => {
   return(
     <>
-    <SearchForm>
-      <form>
-        <input id="search" name="search" type="text" placeholder='Titre, auteur, ...' />
-        <button type="submitted">Rechercher</button>
-      </form>
-    </SearchForm>
-
+    
     <Wrapper>
       <CardsContainer>
         <CardAdd>
@@ -58,6 +48,7 @@ const Index = ({ songs }) => {
           {songs.map(song => {
           return (
             <CardSong>
+              <img src={song.url_img} />
               <h1>{song.title}</h1>
               <p>{song.author}</p>
               <p>{song.description}</p>
